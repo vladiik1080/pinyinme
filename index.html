@@ -1,0 +1,503 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>PinyinMe — китайский язык онлайн</title>
+<meta name="description" content="Индивидуальные занятия китайским языком онлайн: с нуля, разговорный, подготовка к HSK. Бесплатный пробный урок.">
+<style>html,body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;800&family=Onest:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@700&text=%E4%B8%AD%E4%B9%A0%E4%B9%A6%E4%BD%A0%E5%8A%A0%E5%8F%8B%E5%9B%BD%E5%A5%BD%E5%A6%88%E5%AD%A6%E5%B8%88%E6%96%87%E6%9C%8B%E6%B2%B9%E8%80%81%E8%8C%B6%E8%B0%A2%E9%A9%AC%E9%AA%82%E9%BA%BB&display=swap">
+<style>
+/* Layout: deep-jade hero with an animated stroke-order 中, a tangerine word ticker, then a bento grid of colored tiles; sections are full-width bands with a centered 1200px inner wrapper */
+:root{
+  --bg:#F2F5F3; --surface:#FFFFFF; --ink:#0E1A16; --muted:#5A6863; --line:#DCE4DF;
+  --jade:#0C3A2D; --jade-2:#145441; --on-jade:#EAF7F0; --on-jade-muted:#9CC3B2;
+  --mint:#B8F0D2; --lilac:#DCD5FF; --tang:#FF6A2B; --on-tile:#0E1A16;
+  --ph:#9A6B00; --ph-bg:#FFF2C9;
+  --f-display:"Unbounded","Onest",system-ui,sans-serif;
+  --f-body:"Onest",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-han:"Noto Serif SC","Songti SC","SimSun",serif;
+  --r:28px;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#09110E; --surface:#121D19; --ink:#EAF2EE; --muted:#93A59E; --line:#22332D;
+  --jade:#0A2A21; --jade-2:#123D30; --ph:#FFD36B; --ph-bg:#3A2E0E; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#09110E; --surface:#121D19; --ink:#EAF2EE; --muted:#93A59E; --line:#22332D;
+  --jade:#0A2A21; --jade-2:#123D30; --ph:#FFD36B; --ph-bg:#3A2E0E; color-scheme:dark}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:17px;line-height:1.55;overflow-x:clip}
+.wrap{max-width:1200px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:var(--f-display);line-height:1.08;text-wrap:balance;margin:0;font-weight:800}
+h1{font-size:clamp(2.4rem,6.4vw,5.2rem);letter-spacing:-.03em}
+h2{font-size:clamp(1.8rem,4vw,3rem);letter-spacing:-.02em}
+h3{font-size:1.15rem;font-weight:600;letter-spacing:-.01em}
+p{margin:0}
+:focus-visible{outline:3px solid var(--tang);outline-offset:3px}
+.han{font-family:var(--f-han);font-weight:700}
+.chip{display:inline-flex;align-items:center;gap:8px;font-size:.8rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:6px 12px;border-radius:999px;border:1px solid currentColor;width:fit-content}
+.muted{color:var(--muted)}
+.ph{background:var(--ph-bg);color:var(--ph);outline:1.5px dashed var(--ph);outline-offset:1px;border-radius:6px;padding:0 .25em}
+section{padding-block:96px}
+.sec-head{display:flex;justify-content:space-between;align-items:end;gap:24px;flex-wrap:wrap;margin-bottom:40px}
+.sec-head h2{max-width:16ch}
+.sec-head p{max-width:42ch}
+.btn{display:inline-flex;align-items:center;gap:10px;font:700 1rem var(--f-body);padding:15px 24px;border-radius:999px;border:0;background:var(--tang);color:var(--on-tile);text-decoration:none;cursor:pointer;transition:transform .2s,box-shadow .2s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 10px 24px -10px var(--tang)}
+.btn .arr{display:inline-grid;place-items:center;width:26px;height:26px;border-radius:50%;background:var(--on-tile);color:var(--tang);font-size:.9rem}
+.btn.light{background:var(--on-jade);color:var(--jade)}
+.btn.light .arr{background:var(--jade);color:var(--on-jade)}
+
+/* ---------- hero ---------- */
+.hero{background:var(--jade);color:var(--on-jade);padding-block:0 88px;position:relative;overflow:hidden}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--jade)}
+.hero::after{content:"文";position:absolute;right:-4vw;bottom:-10vw;font-family:var(--f-han);font-weight:700;font-size:44vw;line-height:1;color:var(--jade-2);pointer-events:none;z-index:0}
+.hero .wrap{position:relative;z-index:1}
+.draft{font-size:.82rem;color:var(--on-jade-muted);padding-block:10px;border-bottom:1px solid var(--jade-2)}
+.draft b{color:var(--ph-bg)}
+nav.top{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:22px}
+.logo{display:flex;align-items:center;gap:12px;font-family:var(--f-display);font-weight:800;font-size:1.1rem;color:var(--on-jade);text-decoration:none}
+.logo .seal{display:grid;place-items:center;width:42px;height:42px;border-radius:12px;background:var(--tang);color:var(--on-tile);font-size:1.3rem}
+.logo .ph{background:transparent;color:var(--on-jade);outline-color:var(--on-jade-muted)}
+nav.top ul{display:flex;gap:6px;list-style:none;margin:0;padding:6px;border-radius:999px;background:var(--jade-2)}
+nav.top ul a{display:block;padding:8px 16px;border-radius:999px;color:var(--on-jade);text-decoration:none;font-size:.92rem}
+nav.top ul a:hover{background:var(--jade)}
+@media (max-width:900px){nav.top ul{display:none}}
+
+.hero-grid{display:grid;grid-template-columns:1.25fr .75fr;gap:40px;align-items:center;padding-top:48px}
+.hero-grid>*{min-width:0}
+.hero-copy{display:grid;gap:28px}
+.hero h1 em{font-style:normal;color:var(--mint)}
+.hero-copy p{color:var(--on-jade-muted);font-size:1.15rem;max-width:46ch}
+.hero-actions{display:flex;flex-wrap:wrap;gap:14px;align-items:center}
+.avatars{display:flex;align-items:center;gap:12px;color:var(--on-jade-muted);font-size:.9rem}
+.avatars span.a{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;font-weight:700;color:var(--on-tile);border:2px solid var(--jade);margin-left:-10px}
+.avatars span.a:first-child{margin-left:0}
+
+.stroke-card{background:var(--jade-2);border-radius:var(--r);padding:22px;display:grid;gap:12px;justify-items:center;border:1px solid rgba(255,255,255,.06)}
+.stroke-card svg{width:100%;max-width:300px;height:auto}
+.stroke-card .ghost{stroke:var(--jade);stroke-width:18;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.stroke-card .ink{stroke:var(--mint);stroke-width:18;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.stroke-card .grid line{stroke:var(--on-jade-muted);stroke-opacity:.25;stroke-dasharray:4 6}
+.playing .ink{stroke-dasharray:1;stroke-dashoffset:1;animation:draw .55s ease-out forwards}
+.playing .ink:nth-of-type(2){animation-delay:.6s}
+.playing .ink:nth-of-type(3){animation-delay:1.2s}
+.playing .ink:nth-of-type(4){animation-delay:1.8s}
+@keyframes draw{to{stroke-dashoffset:0}}
+.stroke-meta{display:flex;justify-content:space-between;align-items:center;width:100%;gap:12px}
+.stroke-meta b{font-family:var(--f-display);font-size:1.3rem;color:var(--on-jade)}
+.stroke-meta span{display:block;font-size:.85rem;color:var(--on-jade-muted)}
+.replay{font:600 .85rem var(--f-body);background:transparent;color:var(--on-jade);border:1px solid var(--on-jade-muted);border-radius:999px;padding:8px 14px;cursor:pointer}
+.replay:hover{background:var(--jade)}
+@media (max-width:860px){.hero-grid{grid-template-columns:1fr}.stroke-card{max-width:380px}}
+
+/* ---------- ticker ---------- */
+.ticker{background:var(--tang);color:var(--on-tile);overflow:hidden;padding-block:18px;transform:rotate(-1.2deg);margin:-14px -10px 0;position:relative;z-index:2}
+.track{display:flex;gap:44px;width:max-content;animation:tick 40s linear infinite}
+.track span{display:flex;align-items:baseline;gap:10px;white-space:nowrap;font-weight:500}
+.track .han{font-size:1.6rem}
+.track i{font-style:normal;opacity:.7}
+@keyframes tick{to{transform:translateX(-50%)}}
+
+/* ---------- bento ---------- */
+.bento{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.tile{border-radius:var(--r);padding:28px;display:grid;gap:12px;align-content:start;min-width:0;background:var(--surface);border:1px solid var(--line);transition:transform .25s}
+.tile:hover{transform:translateY(-4px)}
+.tile p{font-size:.98rem}
+.tile.c-mint{background:var(--mint);color:var(--on-tile);border:0}
+.tile.c-lilac{background:var(--lilac);color:var(--on-tile);border:0}
+.tile.c-tang{background:var(--tang);color:var(--on-tile);border:0}
+.tile.c-jade{background:var(--jade);color:var(--on-jade);border:0}
+.tile.c-jade p{color:var(--on-jade-muted)}
+.span2{grid-column:span 2}
+.row2{grid-row:span 2}
+.tile .big{font-family:var(--f-display);font-weight:800;font-size:clamp(2.6rem,5vw,4rem);line-height:1;letter-spacing:-.03em}
+.levels{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}
+.levels span{font-weight:700;font-size:.85rem;padding:6px 12px;border-radius:999px;background:var(--on-tile);color:var(--mint)}
+
+.tone .stage{display:flex;align-items:center;gap:22px}
+.tone .char{font-size:6rem;line-height:1}
+.tone .pin{font-family:var(--f-display);font-size:2.2rem;font-weight:800;color:var(--tang)}
+.tone svg{width:100%;height:auto}
+.tone .gl{stroke:var(--line)}
+.tone .cur{fill:none;stroke:var(--tang);stroke-width:6;stroke-linecap:round;stroke-linejoin:round;transition:d .35s}
+.tone .btns{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.tone button{font:700 1.1rem var(--f-body);padding:12px 0;border-radius:14px;border:1px solid var(--line);background:var(--bg);color:var(--ink);cursor:pointer}
+.tone button[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+@media (max-width:960px){.bento{grid-template-columns:repeat(2,1fr)}.row2{grid-row:auto}}
+@media (max-width:560px){.bento{grid-template-columns:1fr}.span2{grid-column:auto}}
+
+/* ---------- tutors ---------- */
+.tutors{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.tutor{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:12px 12px 24px;display:grid;gap:14px;align-content:start;transition:transform .25s}
+.tutor:hover{transform:translateY(-4px) rotate(-.4deg)}
+.photo{aspect-ratio:1/1;max-width:100%;border-radius:20px;display:grid;place-items:center;position:relative;overflow:hidden;color:var(--on-tile)}
+.photo .han{font-size:7rem;opacity:.9}
+.photo small{position:absolute;left:12px;top:12px;font-size:.75rem;font-weight:700;background:var(--surface);color:var(--ink);padding:4px 10px;border-radius:999px}
+.tutor .body{padding-inline:12px;display:grid;gap:10px}
+.tags{display:flex;flex-wrap:wrap;gap:6px}
+.tag{font-size:.78rem;font-weight:700;padding:4px 10px;border-radius:999px;border:1px solid var(--line)}
+.tutor p{color:var(--muted);font-size:.95rem}
+@media (max-width:900px){.tutors{grid-template-columns:1fr 1fr}}
+@media (max-width:580px){.tutors{grid-template-columns:1fr}}
+
+/* ---------- steps ---------- */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;list-style:none;margin:0;padding:0;counter-reset:s}
+.steps li{position:relative;padding:28px;border-radius:var(--r);border:1px dashed var(--muted);display:grid;gap:10px;align-content:start}
+.steps li::before{counter-increment:s;content:"0" counter(s);font-family:var(--f-display);font-weight:800;font-size:2.4rem;color:var(--tang);line-height:1}
+.steps p{color:var(--muted)}
+@media (max-width:760px){.steps{grid-template-columns:1fr}}
+
+/* ---------- hsk ---------- */
+.hsk{display:grid;gap:10px}
+.hsk .row{display:grid;grid-template-columns:90px 1fr;gap:16px;align-items:center}
+.hsk .lvl{font-family:var(--f-display);font-weight:600}
+.bar{height:44px;border-radius:12px;background:var(--surface);border:1px solid var(--line);position:relative;overflow:hidden}
+.bar i{position:absolute;inset:0 auto 0 0;background:var(--mint);border-radius:12px}
+.hsk .row:nth-child(n+4) .bar i{background:var(--lilac)}
+.hsk .row:nth-child(6) .bar i{background:var(--tang)}
+.bar span{position:absolute;inset:0;display:flex;align-items:center;padding-left:14px;gap:12px;font-size:.9rem;color:var(--on-tile);white-space:nowrap}
+.bar span b{font-variant-numeric:tabular-nums}
+.bar span em{font-style:normal;color:var(--muted)}
+.bar.dark span em{color:var(--on-tile);opacity:.7}
+.note{font-size:.85rem;color:var(--muted);margin-top:14px}
+@media (max-width:560px){.hsk .row{grid-template-columns:64px 1fr}.bar span em{display:none}}
+
+/* ---------- prices ---------- */
+.prices{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;align-items:stretch}
+.price{border-radius:var(--r);padding:30px;display:grid;gap:18px;align-content:start;background:var(--surface);border:1px solid var(--line)}
+.price.hot{background:var(--jade);color:var(--on-jade);border:0;position:relative}
+.price.hot .badge{position:absolute;top:22px;right:22px;background:var(--tang);color:var(--on-tile);font-size:.75rem;font-weight:700;padding:5px 12px;border-radius:999px}
+.price .sum{font-family:var(--f-display);font-weight:800;font-size:2.4rem;letter-spacing:-.02em;line-height:1}
+.price .per{font-size:.9rem;color:var(--muted)}
+.price.hot .per,.price.hot li{color:var(--on-jade-muted)}
+.price ul{margin:0;padding:0;list-style:none;display:grid;gap:8px;color:var(--muted)}
+.price li::before{content:"✓";color:var(--tang);font-weight:700;margin-right:10px}
+@media (max-width:900px){.prices{grid-template-columns:1fr}}
+
+/* ---------- faq ---------- */
+.faq-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:40px}
+.faq-grid>*{min-width:0}
+.faq{display:grid;gap:10px}
+.faq details{border-radius:20px;background:var(--surface);border:1px solid var(--line);padding:20px 24px}
+.faq summary{cursor:pointer;font-weight:700;list-style:none;display:flex;justify-content:space-between;gap:16px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font-family:var(--f-display);color:var(--tang);font-size:1.3rem;line-height:1;transition:transform .2s}
+.faq details[open] summary::after{transform:rotate(45deg)}
+.faq details p{color:var(--muted);margin-top:12px}
+@media (max-width:860px){.faq-grid{grid-template-columns:1fr}}
+
+/* ---------- signup ---------- */
+.signup{background:var(--jade);color:var(--on-jade);border-radius:40px;padding:56px;display:grid;grid-template-columns:1fr 1fr;gap:48px;position:relative;overflow:hidden}
+.signup>*{min-width:0;position:relative;z-index:1}
+.signup::after{content:"学";position:absolute;left:-30px;bottom:-90px;font-family:var(--f-han);font-weight:700;font-size:320px;line-height:1;color:var(--jade-2)}
+.signup p.lead{color:var(--on-jade-muted);margin-top:16px;max-width:40ch}
+.channels{display:grid;gap:10px;margin-top:32px}
+.channel{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:14px 18px;border-radius:16px;background:var(--jade-2)}
+.channel span{color:var(--on-jade-muted)}
+.channel .ph{background:transparent;color:var(--on-jade);outline-color:var(--on-jade-muted)}
+form{display:grid;gap:14px;background:var(--surface);color:var(--ink);border-radius:var(--r);padding:28px}
+label{display:grid;gap:6px;font-size:.9rem;font-weight:500}
+input,select,textarea{font:inherit;font-size:1rem;padding:13px 16px;border-radius:14px;border:1px solid var(--line);background:var(--bg);color:var(--ink);width:100%}
+textarea{min-height:90px;resize:vertical}
+.pills{display:flex;flex-wrap:wrap;gap:8px}
+.pills label{display:block;cursor:pointer}
+.pills input{position:absolute;opacity:0;width:1px;height:1px}
+.pills span{display:block;padding:9px 14px;border-radius:999px;border:1px solid var(--line);font-size:.9rem}
+.pills input:checked+span{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.pills input:focus-visible+span{outline:3px solid var(--tang);outline-offset:2px}
+.ok{background:var(--mint);color:var(--on-tile);border-radius:14px;padding:12px 16px;font-size:.95rem}
+@media (max-width:860px){.signup{grid-template-columns:1fr;padding:32px 20px;border-radius:28px}}
+
+footer{padding-block:40px;color:var(--muted);font-size:.88rem}
+footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}.playing .ink{stroke-dashoffset:0}}
+</style>
+</head>
+<body>
+<header class="hero" id="top">
+  <div class="wrap">
+    <div class="draft">Черновик: <b>жёлтым пунктиром</b> отмечено то, что нужно заменить на реальные данные.</div>
+    <nav class="top">
+      <a class="logo" href="#top"><span class="seal han">书</span><span>PinyinMe</span></a>
+      <ul>
+        <li><a href="#goals">Направления</a></li>
+        <li><a href="#tutors">Преподаватели</a></li>
+        <li><a href="#prices">Цены</a></li>
+        <li><a href="#faq">Вопросы</a></li>
+      </ul>
+      <a class="btn light" href="#signup">Пробный урок <span class="arr">→</span></a>
+    </nav>
+
+    <div class="hero-grid">
+      <div class="hero-copy">
+        <span class="chip">Китайский онлайн · с нуля до HSK 6</span>
+        <h1>Заговорите <em>по‑китайски</em> с теми, кто сам прошёл этот путь</h1>
+        <p>Небольшая команда преподавателей, которые выучили китайский и знают, где ученики застревают. Тоны, иероглифы, HSK и живая речь.</p>
+        <div class="hero-actions">
+          <a class="btn" href="#signup">Бесплатный пробный урок <span class="arr">→</span></a>
+          <div class="avatars">
+            <span class="a" style="background:var(--mint)">А</span>
+            <span class="a" style="background:var(--lilac)">Б</span>
+            <span class="a" style="background:var(--tang)">В</span>
+            <span><span class="ph">40+ учеников</span> уже с нами</span>
+          </div>
+        </div>
+      </div>
+
+      <figure class="stroke-card" id="stroke" style="margin:0">
+        <svg viewBox="0 0 220 220" aria-label="Порядок черт иероглифа 中">
+          <g class="grid"><line x1="110" y1="6" x2="110" y2="214"/><line x1="6" y1="110" x2="214" y2="110"/><line x1="6" y1="6" x2="214" y2="214"/><line x1="214" y1="6" x2="6" y2="214"/></g>
+          <path class="ghost" d="M50 70 L50 140"/><path class="ghost" d="M50 70 L170 70 L170 140"/><path class="ghost" d="M50 140 L170 140"/><path class="ghost" d="M110 22 L110 200"/>
+          <g>
+            <path class="ink" pathLength="1" d="M50 70 L50 140"/>
+            <path class="ink" pathLength="1" d="M50 70 L170 70 L170 140"/>
+            <path class="ink" pathLength="1" d="M50 140 L170 140"/>
+            <path class="ink" pathLength="1" d="M110 22 L110 200"/>
+          </g>
+        </svg>
+        <figcaption class="stroke-meta">
+          <div><b>zhōng</b><span>«середина», первый знак слова «Китай»</span></div>
+          <button class="replay" type="button" id="replay">Порядок черт ↻</button>
+        </figcaption>
+      </figure>
+    </div>
+  </div>
+</header>
+
+<div class="ticker" aria-hidden="true">
+  <div class="track" id="track">
+    <span><b class="han">你好</b> nǐ hǎo <i>привет</i></span>
+    <span><b class="han">谢谢</b> xièxie <i>спасибо</i></span>
+    <span><b class="han">朋友</b> péngyou <i>друг</i></span>
+    <span><b class="han">学习</b> xuéxí <i>учиться</i></span>
+    <span><b class="han">茶</b> chá <i>чай</i></span>
+    <span><b class="han">中国</b> Zhōngguó <i>Китай</i></span>
+    <span><b class="han">老师</b> lǎoshī <i>учитель</i></span>
+    <span><b class="han">加油</b> jiāyóu <i>давай, ты сможешь!</i></span>
+  </div>
+</div>
+
+<main>
+  <section id="goals">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>Учим под вашу цель</h2>
+        <p class="muted">Не проходим учебник от корки до корки. Сначала разбираемся, зачем вам китайский, и строим программу вокруг этого.</p>
+      </div>
+      <div class="bento">
+        <div class="tile c-mint span2">
+          <span class="chip">Экзамен</span>
+          <div class="big">HSK 1–6</div>
+          <p>Разбираем формат каждого уровня, тренируем аудирование и письмо на реальных вариантах экзамена.</p>
+          <div class="levels"><span>HSK 1</span><span>HSK 2</span><span>HSK 3</span><span>HSK 4</span><span>HSK 5</span><span>HSK 6</span></div>
+        </div>
+
+        <div class="tile span2 row2 tone">
+          <span class="chip">Попробуйте прямо сейчас</span>
+          <h3>Один слог, четыре тона, четыре разных слова</h3>
+          <div class="stage"><div class="char han" id="tChar">妈</div><div><div class="pin" id="tPin">mā</div><div class="muted" id="tMean">мама · ровный высокий</div></div></div>
+          <svg viewBox="0 0 320 110" aria-label="Контур тона">
+            <g class="gl"><line x1="24" y1="15" x2="310" y2="15"/><line x1="24" y1="35" x2="310" y2="35"/><line x1="24" y1="55" x2="310" y2="55"/><line x1="24" y1="75" x2="310" y2="75"/><line x1="24" y1="95" x2="310" y2="95"/></g>
+            <g fill="var(--muted)" font-size="10" font-family="Onest,sans-serif"><text x="6" y="18">5</text><text x="6" y="58">3</text><text x="6" y="98">1</text></g>
+            <path class="cur" id="tPath" d="M40 15 L290 15"/>
+          </svg>
+          <div class="btns" role="group" aria-label="Выбор тона">
+            <button type="button" data-t="0" aria-pressed="true">mā</button>
+            <button type="button" data-t="1" aria-pressed="false">má</button>
+            <button type="button" data-t="2" aria-pressed="false">mǎ</button>
+            <button type="button" data-t="3" aria-pressed="false">mà</button>
+          </div>
+        </div>
+
+        <div class="tile c-lilac"><h3>Разговорный</h3><p>Ставим тоны и произношение, говорим на бытовые темы с первого месяца.</p></div>
+        <div class="tile c-tang"><h3>Для работы</h3><p>Переписка, переговоры, лексика ВЭД, логистики и IT.</p></div>
+        <div class="tile span2"><h3>Школьникам</h3><p class="muted">Подготовка к ОГЭ, ЕГЭ и олимпиадам по китайскому, помощь со школьной программой.</p></div>
+        <div class="tile c-jade span2"><h3>Первый урок бесплатно</h3><p>30 минут: определим уровень и составим план занятий.</p><a class="btn" href="#signup" style="width:fit-content">Записаться <span class="arr">→</span></a></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="tutors" style="padding-top:0">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>Ваши преподаватели</h2>
+        <p class="muted">Перед первым занятием подбираем преподавателя под ваш уровень, цель и расписание.</p>
+      </div>
+      <div class="tutors">
+        <article class="tutor">
+          <div class="photo" style="background:var(--mint)"><span class="han">好</span><small>фото</small></div>
+          <div class="body">
+            <h3 class="ph">Имя Фамилия</h3>
+            <div class="tags"><span class="tag">HSK 6</span><span class="tag">Разговорный</span><span class="tag">С нуля</span></div>
+            <p class="ph">Учился в Китае, 4 года преподаёт. Лучше всего работает с начинающими и ставит произношение.</p>
+          </div>
+        </article>
+        <article class="tutor">
+          <div class="photo" style="background:var(--lilac)"><span class="han">学</span><small>фото</small></div>
+          <div class="body">
+            <h3 class="ph">Имя Фамилия</h3>
+            <div class="tags"><span class="tag">HSK 5</span><span class="tag">Подготовка к HSK</span></div>
+            <p class="ph">Выпускник востоковедения. Готовит к HSK 1–4, ученики сдают с первой попытки.</p>
+          </div>
+        </article>
+        <article class="tutor">
+          <div class="photo" style="background:var(--tang)"><span class="han">茶</span><small>фото</small></div>
+          <div class="body">
+            <h3 class="ph">Имя Фамилия</h3>
+            <div class="tags"><span class="tag">HSK 6</span><span class="tag">Деловой</span><span class="tag">Школьники</span></div>
+            <p class="ph">Работала переводчиком в компании. Ведёт деловой китайский и занятия со школьниками.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="how" style="padding-top:0">
+    <div class="wrap">
+      <div class="sec-head"><h2>Как всё устроено</h2></div>
+      <ol class="steps">
+        <li><h3>Пробный урок</h3><p>30 минут бесплатно. Знакомимся, определяем уровень и цель.</p></li>
+        <li><h3>План обучения</h3><p>Сколько занятий в неделю, к какому сроку и на какой уровень HSK.</p></li>
+        <li><h3>Регулярные уроки</h3><p>По видеосвязи, 60 минут. Домашка с проверкой и словарь в карточках.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="hsk" style="padding-top:0">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>Сколько слов на каждом уровне</h2>
+        <p class="muted">Полосы в масштабе: каждый следующий уровень требует примерно вдвое больше слов.</p>
+      </div>
+      <div class="hsk">
+        <div class="row"><span class="lvl">HSK 1</span><div class="bar"><i style="width:3%"></i><span><b>150</b><em>приветствия, числа, о себе</em></span></div></div>
+        <div class="row"><span class="lvl">HSK 2</span><div class="bar"><i style="width:6%"></i><span><b>300</b><em>простые бытовые диалоги</em></span></div></div>
+        <div class="row"><span class="lvl">HSK 3</span><div class="bar"><i style="width:12%"></i><span><b>600</b><em>путешествия, учёба, работа</em></span></div></div>
+        <div class="row"><span class="lvl">HSK 4</span><div class="bar"><i style="width:24%"></i><span><b>1 200</b><em>свободно на общие темы</em></span></div></div>
+        <div class="row"><span class="lvl">HSK 5</span><div class="bar dark"><i style="width:50%"></i><span><b>2 500</b><em>газеты, фильмы, выступления</em></span></div></div>
+        <div class="row"><span class="lvl">HSK 6</span><div class="bar dark"><i style="width:100%"></i><span><b>5 000+</b><em>уровень, близкий к носителю</em></span></div></div>
+      </div>
+      <p class="note">Шкала HSK 2.0. В новой версии экзамена 9 уровней, мы готовим к обеим.</p>
+    </div>
+  </section>
+
+  <section id="prices" style="padding-top:0">
+    <div class="wrap">
+      <div class="sec-head"><h2>Цены</h2><p class="muted">Платите за урок или берите пакет со скидкой.</p></div>
+      <div class="prices">
+        <div class="price">
+          <h3>Разовое занятие</h3>
+          <div><div class="sum ph">1 500 ₽</div><div class="per">за 60 минут</div></div>
+          <ul><li>Урок по видеосвязи</li><li>Домашнее задание</li></ul>
+        </div>
+        <div class="price hot">
+          <span class="badge">Выгоднее</span>
+          <h3>Пакет 8 занятий</h3>
+          <div><div class="sum ph">11 200 ₽</div><div class="per">1 400 ₽ за урок</div></div>
+          <ul><li>Индивидуальный план</li><li>Переносы без потери оплаты</li><li>Чат с преподавателем</li></ul>
+          <a class="btn" href="#signup" style="width:fit-content">Выбрать пакет <span class="arr">→</span></a>
+        </div>
+        <div class="price">
+          <h3>Подготовка к HSK</h3>
+          <div><div class="sum ph">от 1 700 ₽</div><div class="per">за 60 минут</div></div>
+          <ul><li>Пробный тест в формате экзамена</li><li>Разбор ошибок по каждой части</li></ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq" style="padding-top:0">
+    <div class="wrap faq-grid">
+      <div><h2>Частые вопросы</h2></div>
+      <div class="faq">
+        <details open><summary>Можно начать совсем с нуля?</summary><p>Да, большинство наших учеников начинали с нуля. Первые уроки посвящены пиньиню, тонам и базовым иероглифам.</p></details>
+        <details><summary>Когда я смогу говорить?</summary><p>При двух занятиях в неделю простые диалоги уровня HSK 2 обычно получаются через 4–6 месяцев.</p></details>
+        <details><summary>Где проходят уроки?</summary><p class="ph">Онлайн в Zoom или Telegram. Очно в Москве по договорённости.</p></details>
+        <details><summary>Можно перенести занятие?</summary><p class="ph">Да, если предупредить за 12 часов.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <section id="signup" style="padding-top:0">
+    <div class="wrap">
+      <div class="signup">
+        <div>
+          <h2>Начните с бесплатного урока</h2>
+          <p class="lead">Оставьте контакт, и мы напишем в течение дня, чтобы подобрать удобное время.</p>
+          <div class="channels">
+            <div class="channel"><span>Telegram</span><b class="ph">@username</b></div>
+            <div class="channel"><span>WhatsApp</span><b class="ph">+7 900 000-00-00</b></div>
+            <div class="channel"><span>Почта</span><b class="ph">hello@example.ru</b></div>
+          </div>
+        </div>
+        <form id="lead" novalidate>
+          <label for="f-name">Как вас зовут<input id="f-name" name="name" placeholder="Анна"></label>
+          <label for="f-contact">Telegram или телефон<input id="f-contact" name="contact" placeholder="@anna или +7…"></label>
+          <div style="display:grid;gap:8px"><span style="font-size:.9rem;font-weight:500">Ваш уровень</span>
+            <div class="pills">
+              <label><input type="radio" name="level" id="lv0" value="С нуля" checked><span>С нуля</span></label>
+              <label><input type="radio" name="level" id="lv1" value="HSK 1–2"><span>HSK 1–2</span></label>
+              <label><input type="radio" name="level" id="lv2" value="HSK 3–4"><span>HSK 3–4</span></label>
+              <label><input type="radio" name="level" id="lv3" value="HSK 5+"><span>HSK 5+</span></label>
+            </div>
+          </div>
+          <label for="f-goal">Цель занятий<textarea id="f-goal" name="goal" placeholder="Например: сдать HSK 3 к маю"></textarea></label>
+          <button class="btn" type="submit" style="justify-content:center">Отправить заявку <span class="arr">→</span></button>
+          <div class="ok" id="ok" hidden></div>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer><div class="wrap"><span>© 2026 PinyinMe</span><span>Индивидуальные занятия китайским языком</span></div></footer>
+
+<script>
+(function(){
+  // duplicate ticker content for a seamless loop
+  var tr=document.getElementById("track"); tr.innerHTML+=tr.innerHTML;
+
+  // stroke order replay
+  var card=document.getElementById("stroke");
+  function play(){card.classList.remove("playing");void card.offsetWidth;card.classList.add("playing");}
+  document.getElementById("replay").addEventListener("click",play);
+  if(!matchMedia("(prefers-reduced-motion: reduce)").matches) setTimeout(play,400);
+
+  // tones
+  var tones=[
+    {c:"妈",p:"mā",m:"мама · ровный высокий",d:"M40 15 L290 15"},
+    {c:"麻",p:"má",m:"конопля · восходящий",d:"M40 55 L290 15"},
+    {c:"马",p:"mǎ",m:"лошадь · нисходяще-восходящий",d:"M40 75 Q150 120 290 35"},
+    {c:"骂",p:"mà",m:"ругать · резкий нисходящий",d:"M40 15 L290 95"}
+  ];
+  var btns=document.querySelectorAll(".tone button");
+  btns.forEach(function(b){b.addEventListener("click",function(){
+    var t=tones[+b.dataset.t];
+    document.getElementById("tChar").textContent=t.c;
+    document.getElementById("tPin").textContent=t.p;
+    document.getElementById("tMean").textContent=t.m;
+    document.getElementById("tPath").setAttribute("d",t.d);
+    btns.forEach(function(x){x.setAttribute("aria-pressed",x===b?"true":"false")});
+  })});
+
+  // form (preview only)
+  var form=document.getElementById("lead"),ok=document.getElementById("ok");
+  form.addEventListener("submit",function(e){
+    e.preventDefault();
+    var name=form.elements.name.value.trim(),contact=form.elements.contact.value.trim();
+    ok.hidden=false;
+    if(!name||!contact){ok.textContent="Укажите имя и контакт, чтобы мы могли с вами связаться.";return;}
+    ok.textContent="Спасибо, "+name+"! Это превью сайта, поэтому заявка пока никуда не отправлена. На настоящем сайте она придёт преподавателям в Telegram.";
+  });
+})();
+</script>
+
+</body>
+</html>
