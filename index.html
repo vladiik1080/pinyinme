@@ -3,19 +3,20 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>PinyinMe — китайский язык онлайн</title>
+<title>pinyinme.ru — репетиторство по китайскому языку</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23C8302A'/%3E%3Ctext x='32' y='47' font-size='40' text-anchor='middle' fill='white' font-family='serif'%3E%E6%8B%BC%3C/text%3E%3C/svg%3E">
 <meta name="description" content="Индивидуальные занятия китайским языком онлайн: с нуля, разговорный, подготовка к HSK. Бесплатный пробный урок.">
 <style>html,body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;800&family=Onest:wght@400;500;700&display=swap">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@700&text=%E4%B8%AD%E4%B9%A0%E4%B9%A6%E4%BD%A0%E5%8A%A0%E5%8F%8B%E5%9B%BD%E5%A5%BD%E5%A6%88%E5%AD%A6%E5%B8%88%E6%96%87%E6%9C%8B%E6%B2%B9%E8%80%81%E8%8C%B6%E8%B0%A2%E9%A9%AC%E9%AA%82%E9%BA%BB&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@700&text=%E6%8B%BC%E4%B8%AD%E4%B9%A0%E4%B9%A6%E4%BD%A0%E5%8A%A0%E5%8F%8B%E5%9B%BD%E5%A5%BD%E5%A6%88%E5%AD%A6%E5%B8%88%E6%96%87%E6%9C%8B%E6%B2%B9%E8%80%81%E8%8C%B6%E8%B0%A2%E9%A9%AC%E9%AA%82%E9%BA%BB&display=swap">
 <style>
 /* Layout: deep-jade hero with an animated stroke-order 中, a tangerine word ticker, then a bento grid of colored tiles; sections are full-width bands with a centered 1200px inner wrapper */
 :root{
-  --bg:#F2F5F3; --surface:#FFFFFF; --ink:#0E1A16; --muted:#5A6863; --line:#DCE4DF;
-  --jade:#0C3A2D; --jade-2:#145441; --on-jade:#EAF7F0; --on-jade-muted:#9CC3B2;
-  --mint:#B8F0D2; --lilac:#DCD5FF; --tang:#FF6A2B; --on-tile:#0E1A16;
+  --bg:#F6F5F3; --surface:#FFFFFF; --ink:#141416; --muted:#64666B; --line:#E2E0DC;
+  --jade:#17181B; --jade-2:#26282D; --on-jade:#F5F4F1; --on-jade-muted:#A7A9AE;
+  --mint:#F4D8D3; --lilac:#E7E4DF; --tang:#C8302A; --on-tile:#141416; --on-tang:#FFFFFF;
   --ph:#9A6B00; --ph-bg:#FFF2C9;
   --f-display:"Unbounded","Onest",system-ui,sans-serif;
   --f-body:"Onest",system-ui,-apple-system,"Segoe UI",sans-serif;
@@ -23,14 +24,14 @@
   --r:28px;
 }
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
-  --bg:#09110E; --surface:#121D19; --ink:#EAF2EE; --muted:#93A59E; --line:#22332D;
-  --jade:#0A2A21; --jade-2:#123D30; --ph:#FFD36B; --ph-bg:#3A2E0E; color-scheme:dark}}
+  --bg:#0E0F11; --surface:#18191C; --ink:#F0EFEC; --muted:#9EA1A6; --line:#2A2C30;
+  --jade:#08090A; --jade-2:#1F2125; --ph:#FFD36B; --ph-bg:#3A2E0E; color-scheme:dark}}
 :root[data-theme="dark"]{
-  --bg:#09110E; --surface:#121D19; --ink:#EAF2EE; --muted:#93A59E; --line:#22332D;
-  --jade:#0A2A21; --jade-2:#123D30; --ph:#FFD36B; --ph-bg:#3A2E0E; color-scheme:dark}
+  --bg:#0E0F11; --surface:#18191C; --ink:#F0EFEC; --muted:#9EA1A6; --line:#2A2C30;
+  --jade:#08090A; --jade-2:#1F2125; --ph:#FFD36B; --ph-bg:#3A2E0E; color-scheme:dark}
 
 *{box-sizing:border-box}
-html{scroll-behavior:smooth}
+html{scroll-behavior:smooth;overflow-x:clip}
 body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:17px;line-height:1.55;overflow-x:clip}
 .wrap{max-width:1200px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
 h1,h2,h3{font-family:var(--f-display);line-height:1.08;text-wrap:balance;margin:0;font-weight:800}
@@ -47,9 +48,9 @@ section{padding-block:96px}
 .sec-head{display:flex;justify-content:space-between;align-items:end;gap:24px;flex-wrap:wrap;margin-bottom:40px}
 .sec-head h2{max-width:16ch}
 .sec-head p{max-width:42ch}
-.btn{display:inline-flex;align-items:center;gap:10px;font:700 1rem var(--f-body);padding:15px 24px;border-radius:999px;border:0;background:var(--tang);color:var(--on-tile);text-decoration:none;cursor:pointer;transition:transform .2s,box-shadow .2s}
+.btn{display:inline-flex;align-items:center;gap:10px;font:700 1rem var(--f-body);padding:15px 24px;border-radius:999px;border:0;background:var(--tang);color:var(--on-tang);text-decoration:none;cursor:pointer;white-space:nowrap;transition:transform .2s,box-shadow .2s}
 .btn:hover{transform:translateY(-2px);box-shadow:0 10px 24px -10px var(--tang)}
-.btn .arr{display:inline-grid;place-items:center;width:26px;height:26px;border-radius:50%;background:var(--on-tile);color:var(--tang);font-size:.9rem}
+.btn .arr{display:inline-grid;place-items:center;width:26px;height:26px;border-radius:50%;background:var(--on-tang);color:var(--tang);font-size:.9rem}
 .btn.light{background:var(--on-jade);color:var(--jade)}
 .btn.light .arr{background:var(--jade);color:var(--on-jade)}
 
@@ -62,7 +63,13 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .draft b{color:var(--ph-bg)}
 nav.top{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:22px}
 .logo{display:flex;align-items:center;gap:12px;font-family:var(--f-display);font-weight:800;font-size:1.1rem;color:var(--on-jade);text-decoration:none}
-.logo .seal{display:grid;place-items:center;width:42px;height:42px;border-radius:12px;background:var(--tang);color:var(--on-tile);font-size:1.3rem}
+.logo{gap:8px;font-family:var(--f-body);font-weight:700;font-size:1.5rem;letter-spacing:-.01em}
+.logo .mark{position:relative;display:grid;place-items:end center;width:44px;height:48px}
+.logo .mark .han{font-size:2rem;line-height:1;color:var(--on-jade)}
+.logo .mark svg{position:absolute;top:-2px;left:2px;width:40px;height:auto}
+.logo .ru{color:var(--tang)}
+.logo small{display:block;font-size:.72rem;font-weight:500;letter-spacing:0;color:var(--on-jade-muted);line-height:1.2}
+@media (max-width:480px){.logo small{display:none}.logo{font-size:1.2rem}}
 .logo .ph{background:transparent;color:var(--on-jade);outline-color:var(--on-jade-muted)}
 nav.top ul{display:flex;gap:6px;list-style:none;margin:0;padding:6px;border-radius:999px;background:var(--jade-2)}
 nav.top ul a{display:block;padding:8px 16px;border-radius:999px;color:var(--on-jade);text-decoration:none;font-size:.92rem}
@@ -97,7 +104,7 @@ nav.top ul a:hover{background:var(--jade)}
 @media (max-width:860px){.hero-grid{grid-template-columns:1fr}.stroke-card{max-width:380px}}
 
 /* ---------- ticker ---------- */
-.ticker{background:var(--tang);color:var(--on-tile);overflow:hidden;padding-block:18px;transform:rotate(-1.2deg);margin:-14px -10px 0;position:relative;z-index:2}
+.ticker{background:var(--tang);color:var(--on-tang);overflow:hidden;padding-block:18px;transform:rotate(-1.2deg);margin:-14px -10px 0;position:relative;z-index:2}
 .track{display:flex;gap:44px;width:max-content;animation:tick 40s linear infinite}
 .track span{display:flex;align-items:baseline;gap:10px;white-space:nowrap;font-weight:500}
 .track .han{font-size:1.6rem}
@@ -111,7 +118,8 @@ nav.top ul a:hover{background:var(--jade)}
 .tile p{font-size:.98rem}
 .tile.c-mint{background:var(--mint);color:var(--on-tile);border:0}
 .tile.c-lilac{background:var(--lilac);color:var(--on-tile);border:0}
-.tile.c-tang{background:var(--tang);color:var(--on-tile);border:0}
+.tile.c-tang{background:var(--tang);color:var(--on-tang);border:0}
+.tile.c-tang .btn,.tile.c-jade .btn{box-shadow:none}
 .tile.c-jade{background:var(--jade);color:var(--on-jade);border:0}
 .tile.c-jade p{color:var(--on-jade-muted)}
 .span2{grid-column:span 2}
@@ -161,6 +169,7 @@ nav.top ul a:hover{background:var(--jade)}
 .bar i{position:absolute;inset:0 auto 0 0;background:var(--mint);border-radius:12px}
 .hsk .row:nth-child(n+4) .bar i{background:var(--lilac)}
 .hsk .row:nth-child(6) .bar i{background:var(--tang)}
+.hsk .row:nth-child(6) .bar span,.hsk .row:nth-child(6) .bar span em{color:var(--on-tang);opacity:1}
 .bar span{position:absolute;inset:0;display:flex;align-items:center;padding-left:14px;gap:12px;font-size:.9rem;color:var(--on-tile);white-space:nowrap}
 .bar span b{font-variant-numeric:tabular-nums}
 .bar span em{font-style:normal;color:var(--muted)}
@@ -172,7 +181,7 @@ nav.top ul a:hover{background:var(--jade)}
 .prices{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;align-items:stretch}
 .price{border-radius:var(--r);padding:30px;display:grid;gap:18px;align-content:start;background:var(--surface);border:1px solid var(--line)}
 .price.hot{background:var(--jade);color:var(--on-jade);border:0;position:relative}
-.price.hot .badge{position:absolute;top:22px;right:22px;background:var(--tang);color:var(--on-tile);font-size:.75rem;font-weight:700;padding:5px 12px;border-radius:999px}
+.price.hot .badge{position:absolute;top:22px;right:22px;background:var(--tang);color:var(--on-tang);font-size:.75rem;font-weight:700;padding:5px 12px;border-radius:999px}
 .price .sum{font-family:var(--f-display);font-weight:800;font-size:2.4rem;letter-spacing:-.02em;line-height:1}
 .price .per{font-size:.9rem;color:var(--muted)}
 .price.hot .per,.price.hot li{color:var(--on-jade-muted)}
@@ -225,7 +234,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
   <div class="wrap">
     <div class="draft">Черновик: <b>жёлтым пунктиром</b> отмечено то, что нужно заменить на реальные данные.</div>
     <nav class="top">
-      <a class="logo" href="#top"><span class="seal han">书</span><span>PinyinMe</span></a>
+      <a class="logo" href="#top" aria-label="pinyinme.ru, на главную"><span class="mark"><svg viewBox="0 0 40 22" aria-hidden="true"><path d="M2 8 L22 1 L38 8 L22 14 Z" fill="var(--tang)"/><path d="M10 11 L10 17 Q22 22 32 17 L32 11 L22 14 Z" fill="var(--tang)"/><path d="M6 9.5 L6 19" stroke="var(--tang)" stroke-width="1.6"/><circle cx="6" cy="20" r="1.8" fill="var(--tang)"/></svg><span class="han">拼</span></span><span>pinyinme<span class="ru">.ru</span><small>Репетиторство по китайскому языку</small></span></a>
       <ul>
         <li><a href="#goals">Направления</a></li>
         <li><a href="#tutors">Преподаватели</a></li>
@@ -245,7 +254,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
           <div class="avatars">
             <span class="a" style="background:var(--mint)">А</span>
             <span class="a" style="background:var(--lilac)">Б</span>
-            <span class="a" style="background:var(--tang)">В</span>
+            <span class="a" style="background:var(--tang);color:var(--on-tang)">В</span>
             <span><span class="ph">40+ учеников</span> уже с нами</span>
           </div>
         </div>
@@ -348,7 +357,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
           </div>
         </article>
         <article class="tutor">
-          <div class="photo" style="background:var(--tang)"><span class="han">茶</span><small>фото</small></div>
+          <div class="photo" style="background:var(--tang);color:var(--on-tang)"><span class="han">茶</span><small>фото</small></div>
           <div class="body">
             <h3 class="ph">Имя Фамилия</h3>
             <div class="tags"><span class="tag">HSK 6</span><span class="tag">Деловой</span><span class="tag">Школьники</span></div>
@@ -457,7 +466,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
   </section>
 </main>
 
-<footer><div class="wrap"><span>© 2026 PinyinMe</span><span>Индивидуальные занятия китайским языком</span></div></footer>
+<footer><div class="wrap"><span>© 2026 pinyinme.ru</span><span>Индивидуальные занятия китайским языком</span></div></footer>
 
 <script>
 (function(){
