@@ -476,6 +476,7 @@ footer{border-top:1px solid var(--line)}
           </div>
         </div>
         <form id="lead" novalidate>
+          <input type="text" name="website" id="f-web" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
           <label for="f-name">Как вас зовут<input id="f-name" name="name" placeholder="Анна"></label>
           <label for="f-contact">Telegram или телефон<input id="f-contact" name="contact" placeholder="@anna или +7…"></label>
           <div style="display:grid;gap:8px"><span style="font-size:.9rem;font-weight:500">Ваш уровень</span>
@@ -593,13 +594,27 @@ footer{border-top:1px solid var(--line)}
 
   // form (preview only)
   var form=document.getElementById("lead"),ok=document.getElementById("ok");
+  // адрес функции в Яндекс Облаке, которая пересылает заявку в Telegram
+  var LEAD_URL="";
   form.addEventListener("submit",function(e){
     e.preventDefault();
     var name=form.elements.name.value.trim(),contact=form.elements.contact.value.trim();
     ok.hidden=false;
     if(!name||!contact){ok.textContent="Укажите имя и контакт, чтобы мы могли с вами связаться.";return;}
     if(!form.elements.consent.checked){ok.textContent="Отметьте согласие на обработку персональных данных.";return;}
-    ok.textContent="Спасибо, "+name+"! Форма заявок пока настраивается, поэтому напишите нам, пожалуйста, в Telegram или на почту: контакты слева.";
+    var fail="Не получилось отправить заявку. Напишите нам, пожалуйста, в Telegram @pinyinme или на PinyinMe@yandex.ru.";
+    if(!LEAD_URL){ok.textContent=fail;return;}
+    var btn=form.querySelector("button[type=submit]");btn.disabled=true;ok.textContent="Отправляем…";
+    fetch(LEAD_URL,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({
+      name:name,contact:contact,level:form.elements.level.value,goal:form.elements.goal.value.trim(),
+      consent:true,website:form.elements.website.value})})
+    .then(function(r){return r.ok?r.json():{ok:false}})
+    .then(function(d){
+      if(d.ok){ok.textContent="Спасибо, "+name+"! Заявка отправлена, мы напишем вам в течение дня.";form.reset();}
+      else ok.textContent=fail;
+    })
+    .catch(function(){ok.textContent=fail;})
+    .finally(function(){btn.disabled=false;});
   });
 })();
 </script>
