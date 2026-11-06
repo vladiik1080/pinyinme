@@ -11,18 +11,15 @@
 <meta name="theme-color" content="#17181B">
 <meta name="description" content="Индивидуальные занятия китайским языком онлайн: с нуля, разговорный, подготовка к HSK. Бесплатный пробный урок.">
 <style>html,body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;800&family=Onest:wght@400;500;700&display=swap">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@700&text=%E6%8B%BC%E4%B8%AD%E4%B9%A0%E4%B9%A6%E4%BD%A0%E5%8A%A0%E5%8F%8B%E5%9B%BD%E5%A5%BD%E5%A6%88%E5%AD%A6%E5%B8%88%E6%96%87%E6%9C%8B%E6%B2%B9%E8%80%81%E8%8C%B6%E8%B0%A2%E9%A9%AC%E9%AA%82%E9%BA%BB&display=swap">
+<link rel="stylesheet" href="fonts/fonts.css">
 <style>
 /* Layout: deep-jade hero with an animated stroke-order 中, a tangerine word ticker, then a bento grid of colored tiles; sections are full-width bands with a centered 1200px inner wrapper */
 :root{
   --bg:#F6F5F3; --surface:#FFFFFF; --ink:#141416; --muted:#64666B; --line:#E2E0DC;
   --jade:#17181B; --jade-2:#26282D; --on-jade:#F5F4F1; --on-jade-muted:#A7A9AE;
-  --mint:#F4D8D3; --lilac:#E7E4DF; --tang:#C8302A; --on-tile:#141416; --on-tang:#FFFFFF;
+  --mint:#F4D8D3; --lilac:#E7E4DF; --tang:#C8302A; --on-tile:#141416; --on-tang:#FFFFFF; --red-soft:#F07A70;
   --ph:#9A6B00; --ph-bg:#FFF2C9;
-  --f-display:"Unbounded","Onest",system-ui,sans-serif;
+  --f-display:"Montserrat","Onest",system-ui,sans-serif;
   --f-body:"Onest",system-ui,-apple-system,"Segoe UI",sans-serif;
   --f-han:"Noto Serif SC","Songti SC","SimSun",serif;
   --r:28px;
@@ -38,9 +35,9 @@
 html{scroll-behavior:smooth;overflow-x:clip}
 body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:17px;line-height:1.55;overflow-x:clip}
 .wrap{max-width:1200px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
-h1,h2,h3{font-family:var(--f-display);line-height:1.08;text-wrap:balance;margin:0;font-weight:800}
-h1{font-size:clamp(2.4rem,6.4vw,5.2rem);letter-spacing:-.03em}
-h2{font-size:clamp(1.8rem,4vw,3rem);letter-spacing:-.02em}
+h1,h2,h3{font-family:var(--f-display);line-height:1.12;text-wrap:balance;margin:0;font-weight:700}
+h1{font-size:clamp(2.2rem,5.4vw,4.3rem);letter-spacing:-.02em}
+h2{font-size:clamp(1.7rem,3.6vw,2.7rem);letter-spacing:-.015em}
 h3{font-size:1.15rem;font-weight:600;letter-spacing:-.01em}
 p{margin:0}
 :focus-visible{outline:3px solid var(--tang);outline-offset:3px}
@@ -63,10 +60,8 @@ section{padding-block:96px}
 body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--jade)}
 .hero::after{content:"文";position:absolute;right:-4vw;bottom:-10vw;font-family:var(--f-han);font-weight:700;font-size:44vw;line-height:1;color:var(--jade-2);pointer-events:none;z-index:0}
 .hero .wrap{position:relative;z-index:1}
-.draft{font-size:.82rem;color:var(--on-jade-muted);padding-block:10px;border-bottom:1px solid var(--jade-2)}
-.draft b{color:var(--ph-bg)}
 nav.top{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:22px}
-.logo{display:flex;align-items:center;gap:12px;font-family:var(--f-display);font-weight:800;font-size:1.1rem;color:var(--on-jade);text-decoration:none}
+.logo{display:flex;align-items:center;gap:12px;font-family:var(--f-display);font-weight:700;font-size:1.1rem;color:var(--on-jade);text-decoration:none}
 .logo img{display:block;height:58px;width:auto}
 .logo .ph{background:transparent;color:var(--on-jade);outline-color:var(--on-jade-muted)}
 nav.top ul{display:flex;gap:6px;list-style:none;margin:0;padding:6px;border-radius:999px;background:var(--jade-2)}
@@ -77,7 +72,7 @@ nav.top ul a:hover{background:var(--jade)}
 .hero-grid{display:grid;grid-template-columns:1.25fr .75fr;gap:40px;align-items:center;padding-top:48px}
 .hero-grid>*{min-width:0}
 .hero-copy{display:grid;gap:28px}
-.hero h1 em{font-style:normal;color:var(--mint)}
+.hero h1 em{font-style:normal;color:var(--red-soft)}
 .hero-copy p{color:var(--on-jade-muted);font-size:1.15rem;max-width:46ch}
 .hero-actions{display:flex;flex-wrap:wrap;gap:14px;align-items:center}
 
@@ -119,13 +114,13 @@ nav.top ul a:hover{background:var(--jade)}
 .tile.c-jade p{color:var(--on-jade-muted)}
 .span2{grid-column:span 2}
 .row2{grid-row:span 2}
-.tile .big{font-family:var(--f-display);font-weight:800;font-size:clamp(2.6rem,5vw,4rem);line-height:1;letter-spacing:-.03em}
+.tile .big{font-family:var(--f-display);font-weight:700;font-size:clamp(2.6rem,5vw,4rem);line-height:1;letter-spacing:-.03em}
 .levels{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}
 .levels span{font-weight:700;font-size:.85rem;padding:6px 12px;border-radius:999px;background:var(--on-tile);color:var(--mint)}
 
 .tone .stage{display:flex;align-items:center;gap:22px}
 .tone .char{font-size:6rem;line-height:1}
-.tone .pin{font-family:var(--f-display);font-size:2.2rem;font-weight:800;color:var(--tang)}
+.tone .pin{font-family:var(--f-display);font-size:2.2rem;font-weight:700;color:var(--tang)}
 .tone svg{width:100%;height:auto}
 .tone .gl{stroke:var(--line)}
 .tone .cur{fill:none;stroke:var(--tang);stroke-width:6;stroke-linecap:round;stroke-linejoin:round;transition:d .35s}
@@ -138,7 +133,7 @@ nav.top ul a:hover{background:var(--jade)}
 /* ---------- steps ---------- */
 .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;list-style:none;margin:0;padding:0;counter-reset:s}
 .steps li{position:relative;padding:28px;border-radius:var(--r);border:1px dashed var(--muted);display:grid;gap:10px;align-content:start}
-.steps li::before{counter-increment:s;content:"0" counter(s);font-family:var(--f-display);font-weight:800;font-size:2.4rem;color:var(--tang);line-height:1}
+.steps li::before{counter-increment:s;content:"0" counter(s);font-family:var(--f-display);font-weight:700;font-size:2.4rem;color:var(--tang);line-height:1}
 .steps p{color:var(--muted)}
 @media (max-width:760px){.steps{grid-template-columns:1fr}}
 
@@ -163,7 +158,7 @@ nav.top ul a:hover{background:var(--jade)}
 .price{border-radius:var(--r);padding:30px;display:grid;gap:18px;align-content:start;background:var(--surface);border:1px solid var(--line)}
 .price.hot{background:var(--jade);color:var(--on-jade);border:0;position:relative}
 .price.hot .badge{position:absolute;top:22px;right:22px;background:var(--tang);color:var(--on-tang);font-size:.75rem;font-weight:700;padding:5px 12px;border-radius:999px}
-.price .sum{font-family:var(--f-display);font-weight:800;font-size:2.4rem;letter-spacing:-.02em;line-height:1}
+.price .sum{font-family:var(--f-display);font-weight:700;font-size:2.4rem;letter-spacing:-.02em;line-height:1}
 .price .per{font-size:.9rem;color:var(--muted)}
 .price.hot .per,.price.hot li{color:var(--on-jade-muted)}
 .price ul{margin:0;padding:0;list-style:none;display:grid;gap:8px;color:var(--muted)}
@@ -205,15 +200,60 @@ textarea{min-height:90px;resize:vertical}
 @media (max-width:860px){.signup{grid-template-columns:1fr;padding:32px 20px;border-radius:28px}}
 
 footer{padding-block:40px;color:var(--muted);font-size:.88rem}
-footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+
+/* ---------- play ---------- */
+.play-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:16px}
+.play-grid>*{min-width:0}
+.builder{align-content:space-between}
+.builder .eq{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-block:10px}
+.part{display:grid;justify-items:center;gap:4px;min-width:84px}
+.part b{font-size:3.6rem;line-height:1.1;transition:transform .35s,opacity .35s}
+.part span{font-size:.85rem;color:var(--muted);text-align:center}
+.part.res b{color:var(--tang);font-size:4.4rem}
+.op{font-family:var(--f-display);font-size:1.6rem;color:var(--muted)}
+.eq.swap .part b{transform:translateY(-8px);opacity:0}
+.pick{display:flex;gap:8px;flex-wrap:wrap}
+.pick button,.opts button{font:500 1rem var(--f-body);padding:10px 16px;border-radius:14px;border:1px solid var(--line);background:var(--bg);color:var(--ink);cursor:pointer}
+.pick button{font-family:var(--f-han);font-size:1.4rem;padding:8px 16px}
+.pick button[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.qword{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap}
+.qword b{font-size:3.4rem;line-height:1.1}
+.qword span{font-size:1.1rem;color:var(--tang);font-weight:500}
+.opts{display:grid;gap:8px}
+.opts button{text-align:left}
+.opts button.right{background:var(--mint);border-color:var(--mint);color:var(--on-tile)}
+.opts button.wrong{opacity:.45}
+.qfoot{display:flex;justify-content:space-between;align-items:center;gap:12px;min-height:40px}
+.replay-dark{font:600 .9rem var(--f-body);background:var(--ink);color:var(--bg);border:0;border-radius:999px;padding:9px 16px;cursor:pointer}
+@media (max-width:900px){.play-grid{grid-template-columns:1fr}}
+
+.ticker-2{background:var(--jade);color:var(--on-jade);transform:rotate(1deg);margin:0 -10px}
+.ticker-2 i{color:var(--on-jade-muted)}
+.track.rev{animation-direction:reverse;animation-duration:48s}
+.hero::after{content:attr(data-bg);transition:opacity 1.2s}
+.hero.fade::after{opacity:0}
+
+.consent{display:flex;gap:10px;align-items:flex-start;font-size:.85rem;font-weight:400;color:var(--muted);grid-template-columns:none}
+.consent input{width:18px;height:18px;margin-top:2px;flex:none;accent-color:var(--tang)}
+.consent a{color:var(--ink)}
+
+footer{border-top:1px solid var(--line)}
+.foot{display:grid;grid-template-columns:1fr 1.6fr auto;gap:32px;align-items:start}
+.foot>*{min-width:0}
+.foot-brand{display:flex;gap:14px;align-items:center}
+.foot-legal{display:grid;gap:6px;font-size:.82rem}
+.foot-links{display:grid;gap:6px;justify-items:end;font-size:.85rem}
+.foot-links a{color:var(--ink)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .foot-logo{content:url(logo-light.svg)}}
+:root[data-theme="dark"] .foot-logo{content:url(logo-light.svg)}
+@media (max-width:860px){.foot{grid-template-columns:1fr}.foot-links{justify-items:start}}
 
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}.playing .ink{stroke-dashoffset:0}}
 </style>
 </head>
 <body>
-<header class="hero" id="top">
+<header class="hero" id="top" data-bg="文">
   <div class="wrap">
-    <div class="draft">Черновик: <b>жёлтым пунктиром</b> отмечено то, что нужно заменить на реальные данные.</div>
     <nav class="top">
       <a class="logo" href="#top" aria-label="pinyinme.ru, на главную"><img src="logo-light.svg" alt="" width="46" height="58"></a>
       <ul>
@@ -301,12 +341,48 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 
         <div class="tile c-lilac"><h3>Разговорный</h3><p>Ставим тоны и произношение, говорим на бытовые темы с первого месяца.</p></div>
         <div class="tile c-tang"><h3>Для работы</h3><p>Переписка, переговоры, лексика ВЭД, логистики и IT.</p></div>
-        <div class="tile span2"><h3>Школьникам</h3><p class="muted">Подготовка к ОГЭ, ЕГЭ и олимпиадам по китайскому, помощь со школьной программой.</p></div>
+        <div class="tile span2"><h3>Для путешествий</h3><p class="muted">Такси, кафе, рынок, отель: учим фразы, которые реально пригодятся в Китае, и читаем вывески и меню.</p></div>
         <div class="tile c-jade span2"><h3>Первый урок бесплатно</h3><p>30 минут: определим уровень и составим план занятий.</p><a class="btn" href="#signup" style="width:fit-content">Записаться <span class="arr">→</span></a></div>
       </div>
     </div>
   </section>
 
+
+  <section id="play" style="padding-top:0">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>Китайский логичнее, чем кажется</h2>
+        <p class="muted">Иероглифы собираются из частей, а многие слова переводятся почти дословно. Попробуйте сами.</p>
+      </div>
+      <div class="play-grid">
+        <div class="tile builder">
+          <span class="chip">Конструктор иероглифов</span>
+          <div class="eq" aria-live="polite">
+            <div class="part"><b class="han" id="bA">女</b><span id="bAm">женщина</span></div>
+            <span class="op">+</span>
+            <div class="part"><b class="han" id="bB">子</b><span id="bBm">ребёнок</span></div>
+            <span class="op">=</span>
+            <div class="part res"><b class="han" id="bR">好</b><span id="bRm">hǎo · хорошо</span></div>
+          </div>
+          <p class="muted" id="bNote">Женщина с ребёнком: это хорошо.</p>
+          <div class="pick" role="group" aria-label="Выберите иероглиф">
+            <button type="button" data-b="0" aria-pressed="true" class="han">好</button>
+            <button type="button" data-b="1" aria-pressed="false" class="han">休</button>
+            <button type="button" data-b="2" aria-pressed="false" class="han">明</button>
+            <button type="button" data-b="3" aria-pressed="false" class="han">林</button>
+          </div>
+        </div>
+
+        <div class="tile quiz">
+          <span class="chip">Угадайте слово</span>
+          <div class="qword"><b class="han" id="qW">电脑</b><span id="qP">diànnǎo</span></div>
+          <p>Дословно: <b id="qL">«электрический мозг»</b>. Что это?</p>
+          <div class="opts" id="qO"></div>
+          <div class="qfoot"><span class="muted" id="qS">Вопрос 1 из 4</span><button type="button" class="replay-dark" id="qN" hidden>Дальше →</button></div>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <section id="how" style="padding-top:0">
     <div class="wrap">
@@ -368,13 +444,25 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
       <div class="faq">
         <details open><summary>Можно начать совсем с нуля?</summary><p>Да, большинство наших учеников начинали с нуля. Первые уроки посвящены пиньиню, тонам и базовым иероглифам.</p></details>
         <details><summary>Когда я смогу говорить?</summary><p>При двух занятиях в неделю простые диалоги уровня HSK 2 обычно получаются через 4–6 месяцев.</p></details>
-        <details><summary>Где проходят уроки?</summary><p class="ph">Онлайн в Zoom или Telegram. Очно в Москве по договорённости.</p></details>
+        <details><summary>Где проходят уроки?</summary><p>Только онлайн: в Zoom, Яндекс Телемосте, Telegram или на другой удобной вам платформе. Нужны компьютер или планшет и наушники с микрофоном.</p></details>
         <details><summary>Можно перенести занятие?</summary><p class="ph">Да, если предупредить за 12 часов.</p></details>
       </div>
     </div>
   </section>
 
-  <section id="signup" style="padding-top:0">
+<div class="ticker ticker-2" aria-hidden="true">
+  <div class="track rev" id="track2">
+    <span><b class="han">早上好</b> zǎoshang hǎo <i>доброе утро</i></span>
+    <span><b class="han">我爱你</b> wǒ ài nǐ <i>я тебя люблю</i></span>
+    <span><b class="han">没问题</b> méi wèntí <i>без проблем</i></span>
+    <span><b class="han">干杯</b> gānbēi <i>до дна!</i></span>
+    <span><b class="han">好吃</b> hǎochī <i>вкусно</i></span>
+    <span><b class="han">再见</b> zàijiàn <i>до свидания</i></span>
+    <span><b class="han">慢慢来</b> mànman lái <i>не торопись</i></span>
+  </div>
+</div>
+
+  <section id="signup">
     <div class="wrap">
       <div class="signup">
         <div>
@@ -398,6 +486,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
             </div>
           </div>
           <label for="f-goal">Цель занятий<textarea id="f-goal" name="goal" placeholder="Например: сдать HSK 3 к маю"></textarea></label>
+          <label class="consent" for="f-ok"><input type="checkbox" id="f-ok" name="consent"><span>Я согласен(на) на обработку персональных данных в соответствии с <a href="privacy.html" target="_blank">политикой конфиденциальности</a></span></label>
           <button class="btn" type="submit" style="justify-content:center">Отправить заявку <span class="arr">→</span></button>
           <div class="ok" id="ok" hidden></div>
         </form>
@@ -406,7 +495,20 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
   </section>
 </main>
 
-<footer><div class="wrap"><span>© 2026 pinyinme.ru</span><span>Индивидуальные занятия китайским языком</span></div></footer>
+<footer>
+  <div class="wrap foot">
+    <div class="foot-brand"><img src="logo.svg" alt="pinyinme.ru" width="38" height="48" class="foot-logo"><p>Индивидуальные онлайн-занятия китайским языком</p></div>
+    <div class="foot-legal">
+      <p>Исполнитель: <span class="ph">Фамилия Имя Отчество</span>, плательщик налога на профессиональный доход (самозанятый)</p>
+      <p>ИНН <span class="ph">000000000000</span> · <span class="ph">hello@example.ru</span></p>
+      <p>Информация на сайте носит ознакомительный характер и не является публичной офертой (ст. 437 ГК РФ). Стоимость и условия занятий согласуются индивидуально.</p>
+    </div>
+    <div class="foot-links">
+      <a href="privacy.html">Политика конфиденциальности</a>
+      <span>© 2026 pinyinme.ru</span>
+    </div>
+  </div>
+</footer>
 
 <script>
 (function(){
@@ -418,6 +520,58 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
   function play(){card.classList.remove("playing");void card.offsetWidth;card.classList.add("playing");}
   document.getElementById("replay").addEventListener("click",play);
   if(!matchMedia("(prefers-reduced-motion: reduce)").matches) setTimeout(play,400);
+
+  // second ticker
+  var tr2=document.getElementById("track2"); tr2.innerHTML+=tr2.innerHTML;
+  var still=matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  // hero background character slowly changes
+  var hero=document.getElementById("top"),bg=["文","学","说","中"],bi=0;
+  if(!still) setInterval(function(){
+    hero.classList.add("fade");
+    setTimeout(function(){bi=(bi+1)%bg.length;hero.dataset.bg=bg[bi];hero.classList.remove("fade");},1200);
+  },6000);
+
+  // character builder
+  var parts=[
+    {a:"女",am:"женщина",b:"子",bm:"ребёнок",r:"好",rm:"hǎo · хорошо",n:"Женщина с ребёнком: это хорошо."},
+    {a:"亻",am:"человек",b:"木",bm:"дерево",r:"休",rm:"xiū · отдыхать",n:"Человек прислонился к дереву и отдыхает."},
+    {a:"日",am:"солнце",b:"月",bm:"луна",r:"明",rm:"míng · светлый",n:"Солнце и луна вместе дают свет."},
+    {a:"木",am:"дерево",b:"木",bm:"дерево",r:"林",rm:"lín · роща",n:"Два дерева рядом: уже роща."}
+  ];
+  var eq=document.querySelector(".builder .eq"),pb=document.querySelectorAll(".pick button");
+  pb.forEach(function(b){b.addEventListener("click",function(){
+    var t=parts[+b.dataset.b];
+    pb.forEach(function(x){x.setAttribute("aria-pressed",x===b?"true":"false")});
+    eq.classList.add("swap");
+    setTimeout(function(){
+      ["A","Am","B","Bm","R","Rm"].forEach(function(k){document.getElementById("b"+k).textContent=t[k.toLowerCase()]});
+      document.getElementById("bNote").textContent=t.n;
+      eq.classList.remove("swap");
+    },still?0:250);
+  })});
+
+  // literal-translation quiz
+  var qs=[
+    {w:"电脑",p:"diànnǎo",l:"«электрический мозг»",o:["Компьютер","Электростанция","Учёный"],a:0},
+    {w:"火车",p:"huǒchē",l:"«огненная повозка»",o:["Пожарная машина","Поезд","Ракета"],a:1},
+    {w:"熊猫",p:"xióngmāo",l:"«медведь-кошка»",o:["Енот","Рысь","Панда"],a:2},
+    {w:"飞机",p:"fēijī",l:"«летающая машина»",o:["Самолёт","Дрон","Воздушный змей"],a:0}
+  ],qi=0,qO=document.getElementById("qO"),qN=document.getElementById("qN");
+  function showQ(){
+    var q=qs[qi];
+    document.getElementById("qW").textContent=q.w;document.getElementById("qP").textContent=q.p;
+    document.getElementById("qL").textContent=q.l;document.getElementById("qS").textContent="Вопрос "+(qi+1)+" из "+qs.length;
+    qO.innerHTML="";qN.hidden=true;
+    q.o.forEach(function(t,i){var b=document.createElement("button");b.type="button";b.textContent=t;
+      b.addEventListener("click",function(){
+        qO.querySelectorAll("button").forEach(function(x,j){x.disabled=true;x.classList.add(j===q.a?"right":"wrong")});
+        document.getElementById("qS").textContent=i===q.a?"Верно!":"Почти. Правильный ответ выделен.";
+        qN.hidden=false;
+      });qO.appendChild(b);});
+  }
+  qN.addEventListener("click",function(){qi=(qi+1)%qs.length;showQ();});
+  showQ();
 
   // tones
   var tones=[
@@ -443,7 +597,8 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
     var name=form.elements.name.value.trim(),contact=form.elements.contact.value.trim();
     ok.hidden=false;
     if(!name||!contact){ok.textContent="Укажите имя и контакт, чтобы мы могли с вами связаться.";return;}
-    ok.textContent="Спасибо, "+name+"! Это превью сайта, поэтому заявка пока никуда не отправлена. На настоящем сайте она придёт преподавателям в Telegram.";
+    if(!form.elements.consent.checked){ok.textContent="Отметьте согласие на обработку персональных данных.";return;}
+    ok.textContent="Спасибо, "+name+"! Форма заявок пока настраивается, поэтому напишите нам, пожалуйста, в Telegram или на почту: контакты слева.";
   });
 })();
 </script>
