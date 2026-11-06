@@ -185,6 +185,8 @@ nav.top ul a:hover{background:var(--jade)}
 .channels{display:grid;gap:10px;margin-top:32px}
 .channel{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:14px 18px;border-radius:16px;background:var(--jade-2)}
 .channel span{color:var(--on-jade-muted)}
+a.channel{color:var(--on-jade);text-decoration:none;transition:background .2s}
+a.channel:hover{background:var(--jade)}
 .channel .ph{background:transparent;color:var(--on-jade);outline-color:var(--on-jade-muted)}
 form{display:grid;gap:14px;background:var(--surface);color:var(--ink);border-radius:var(--r);padding:28px}
 label{display:grid;gap:6px;font-size:.9rem;font-weight:500}
@@ -243,7 +245,7 @@ footer{border-top:1px solid var(--line)}
 .foot-brand{display:flex;gap:14px;align-items:center}
 .foot-legal{display:grid;gap:6px;font-size:.82rem}
 .foot-links{display:grid;gap:6px;justify-items:end;font-size:.85rem}
-.foot-links a{color:var(--ink)}
+.foot-links a,.foot-legal a{color:var(--ink)}
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .foot-logo{content:url(logo-light.svg)}}
 :root[data-theme="dark"] .foot-logo{content:url(logo-light.svg)}
 @media (max-width:860px){.foot{grid-template-columns:1fr}.foot-links{justify-items:start}}
@@ -409,7 +411,7 @@ footer{border-top:1px solid var(--line)}
         <div class="row"><span class="lvl">HSK 5</span><div class="bar dark"><i style="width:50%"></i><span><b>2 500</b><em>газеты, фильмы, выступления</em></span></div></div>
         <div class="row"><span class="lvl">HSK 6</span><div class="bar dark"><i style="width:100%"></i><span><b>5 000+</b><em>уровень, близкий к носителю</em></span></div></div>
       </div>
-      <p class="note">Шкала HSK 2.0. В новой версии экзамена 9 уровней, мы готовим к обеим.</p>
+      <p class="note">Шкала HSK 2.0.</p>
     </div>
   </section>
 
@@ -444,7 +446,7 @@ footer{border-top:1px solid var(--line)}
       <div class="faq">
         <details open><summary>Можно начать совсем с нуля?</summary><p>Да, большинство наших учеников начинали с нуля. Первые уроки посвящены пиньиню, тонам и базовым иероглифам.</p></details>
         <details><summary>Когда я смогу говорить?</summary><p>При двух занятиях в неделю простые диалоги уровня HSK 2 обычно получаются через 4–6 месяцев.</p></details>
-        <details><summary>Где проходят уроки?</summary><p>Только онлайн: в Zoom, Яндекс Телемосте, Telegram или на другой удобной вам платформе. Нужны компьютер или планшет и наушники с микрофоном.</p></details>
+        <details><summary>Где проходят уроки?</summary><p>Только онлайн, в Яндекс Телемосте. Нужны компьютер или планшет и наушники с микрофоном.</p></details>
         <details><summary>Можно перенести занятие?</summary><p class="ph">Да, если предупредить за 12 часов.</p></details>
       </div>
     </div>
@@ -469,9 +471,8 @@ footer{border-top:1px solid var(--line)}
           <h2>Начните с бесплатного урока</h2>
           <p class="lead">Оставьте контакт, и мы напишем в течение дня, чтобы подобрать удобное время.</p>
           <div class="channels">
-            <div class="channel"><span>Telegram</span><b class="ph">@username</b></div>
-            <div class="channel"><span>WhatsApp</span><b class="ph">+7 900 000-00-00</b></div>
-            <div class="channel"><span>Почта</span><b class="ph">hello@example.ru</b></div>
+            <a class="channel" href="https://t.me/pinyinme" target="_blank" rel="noopener"><span>Telegram</span><b>@pinyinme</b></a>
+            <a class="channel" href="mailto:PinyinMe@yandex.ru"><span>Почта</span><b>PinyinMe@yandex.ru</b></a>
           </div>
         </div>
         <form id="lead" novalidate>
@@ -500,7 +501,7 @@ footer{border-top:1px solid var(--line)}
     <div class="foot-brand"><img src="logo.svg" alt="pinyinme.ru" width="38" height="48" class="foot-logo"><p>Индивидуальные онлайн-занятия китайским языком</p></div>
     <div class="foot-legal">
       <p>Исполнитель: <span class="ph">Фамилия Имя Отчество</span>, плательщик налога на профессиональный доход (самозанятый)</p>
-      <p>ИНН <span class="ph">000000000000</span> · <span class="ph">hello@example.ru</span></p>
+      <p>ИНН <span class="ph">000000000000</span> · <a href="mailto:PinyinMe@yandex.ru">PinyinMe@yandex.ru</a></p>
       <p>Информация на сайте носит ознакомительный характер и не является публичной офертой (ст. 437 ГК РФ). Стоимость и условия занятий согласуются индивидуально.</p>
     </div>
     <div class="foot-links">
@@ -576,7 +577,7 @@ footer{border-top:1px solid var(--line)}
   // tones
   var tones=[
     {c:"妈",p:"mā",m:"мама · ровный высокий",d:"M40 15 L290 15"},
-    {c:"麻",p:"má",m:"конопля · восходящий",d:"M40 55 L290 15"},
+    {c:"麻",p:"má",m:"пряный · восходящий",d:"M40 55 L290 15"},
     {c:"马",p:"mǎ",m:"лошадь · нисходяще-восходящий",d:"M40 75 Q150 120 290 35"},
     {c:"骂",p:"mà",m:"ругать · резкий нисходящий",d:"M40 15 L290 95"}
   ];
