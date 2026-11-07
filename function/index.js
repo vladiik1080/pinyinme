@@ -48,5 +48,10 @@ module.exports.handler = async (event) => {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ chat_id: process.env.CHAT_ID, text }),
   });
-  return reply(res.ok ? 200 : 502, origin, { ok: res.ok });
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({}));
+    console.log('Telegram error', res.status, err.description);
+    return reply(502, origin, { ok: false, error: err.description || `telegram ${res.status}` });
+  }
+  return reply(200, origin, { ok: true });
 };

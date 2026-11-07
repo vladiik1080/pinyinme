@@ -608,12 +608,12 @@ footer{border-top:1px solid var(--line)}
     fetch(LEAD_URL,{method:"POST",headers:{"Content-Type":"text/plain;charset=UTF-8"},body:JSON.stringify({
       name:name,contact:contact,level:form.elements.level.value,goal:form.elements.goal.value.trim(),
       consent:true,website:form.elements.website.value})})
-    .then(function(r){return r.ok?r.json():{ok:false}})
+    .then(function(r){return r.json().catch(function(){return {}}).then(function(d){d.status=r.status;return d})})
     .then(function(d){
       if(d.ok){ok.textContent="Спасибо, "+name+"! Заявка отправлена, мы напишем вам в течение дня.";form.reset();}
-      else ok.textContent=fail;
+      else ok.textContent=fail+" (код "+d.status+(d.error?": "+d.error:"")+")";
     })
-    .catch(function(){ok.textContent=fail;})
+    .catch(function(err){ok.textContent=fail+" (сеть: "+err.message+")";})
     .finally(function(){btn.disabled=false;});
   });
 })();
