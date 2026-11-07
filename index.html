@@ -605,7 +605,7 @@ footer{border-top:1px solid var(--line)}
     var fail="Не получилось отправить заявку. Напишите нам, пожалуйста, в Telegram @pinyinme или на PinyinMe@yandex.ru.";
     if(!LEAD_URL){ok.textContent=fail;return;}
     var btn=form.querySelector("button[type=submit]");btn.disabled=true;ok.textContent="Отправляем…";
-    fetch(LEAD_URL,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({
+    fetch(LEAD_URL,{method:"POST",headers:{"Content-Type":"text/plain;charset=UTF-8"},body:JSON.stringify({
       name:name,contact:contact,level:form.elements.level.value,goal:form.elements.goal.value.trim(),
       consent:true,website:form.elements.website.value})})
     .then(function(r){return r.ok?r.json():{ok:false}})
