@@ -1,0 +1,9 @@
+{
+  "name": "pinyinme-leads",
+  "version": "1.0.0",
+  "private": true,
+  "main": "index.js",
+  "dependencies": {
+    "nodemailer": "6.9.16"
+  }
+}
