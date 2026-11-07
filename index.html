@@ -198,6 +198,7 @@ textarea{min-height:90px;resize:vertical}
 .pills span{display:block;padding:9px 14px;border-radius:999px;border:1px solid var(--line);font-size:.9rem}
 .pills input:checked+span{background:var(--ink);color:var(--bg);border-color:var(--ink)}
 .pills input:focus-visible+span{outline:3px solid var(--tang);outline-offset:2px}
+.vpn-note{margin:-4px 0 0;font-size:.8rem;color:var(--muted);text-align:center}
 .ok{background:var(--mint);color:var(--on-tile);border-radius:14px;padding:12px 16px;font-size:.95rem}
 @media (max-width:860px){.signup{grid-template-columns:1fr;padding:32px 20px;border-radius:28px}}
 
@@ -490,6 +491,7 @@ footer{border-top:1px solid var(--line)}
           <label for="f-goal">Цель занятий<textarea id="f-goal" name="goal" placeholder="Например: сдать HSK 3 к маю"></textarea></label>
           <label class="consent" for="f-ok"><input type="checkbox" id="f-ok" name="consent"><span>Я согласен(на) на обработку персональных данных в соответствии с <a href="privacy.html" target="_blank">политикой конфиденциальности</a></span></label>
           <button class="btn" type="submit" style="justify-content:center">Отправить заявку <span class="arr">→</span></button>
+          <p class="vpn-note">Если у вас включён VPN, на время отправки заявки его лучше выключить, иначе она может не дойти.</p>
           <div class="ok" id="ok" hidden></div>
         </form>
       </div>
@@ -613,7 +615,7 @@ footer{border-top:1px solid var(--line)}
       if(d.ok){ok.textContent="Спасибо, "+name+"! Заявка отправлена, мы напишем вам в течение дня.";form.reset();}
       else ok.textContent=fail+" (код "+d.status+(d.error?": "+d.error:"")+")";
     })
-    .catch(function(err){ok.textContent=fail+" (сеть: "+err.message+")";})
+    .catch(function(){ok.textContent="Заявка не ушла. Если включён VPN, выключите его и отправьте ещё раз, или напишите нам в Telegram @pinyinme или на PinyinMe@yandex.ru.";})
     .finally(function(){btn.disabled=false;});
   });
 })();
