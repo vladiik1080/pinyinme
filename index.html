@@ -211,9 +211,9 @@ nav.top ul a:hover{background:var(--jade)}
 .stroke-card svg{width:100%;max-width:300px;height:auto}
 .stroke-card .ghost{fill:var(--jade)}
 .stroke-card .ink{fill:var(--mint)}
-.stroke-card .mk{fill:none;stroke:#fff;stroke-width:34;stroke-linecap:round;stroke-linejoin:round}
+.stroke-card .mk{fill:none;stroke:#fff;stroke-width:34;stroke-linecap:butt;stroke-linejoin:round;stroke-dasharray:1 2;stroke-dashoffset:1}
 .stroke-card .grid line{stroke:var(--on-jade-muted);stroke-opacity:.25;stroke-dasharray:4 6}
-.playing .mk{stroke-dasharray:1;stroke-dashoffset:1;animation:draw .55s ease-out forwards}
+.playing .mk{animation:draw .55s ease-out both}
 @keyframes draw{to{stroke-dashoffset:0}}
 .stroke-meta{display:flex;justify-content:space-between;align-items:center;width:100%;gap:12px}
 .stroke-meta b{font-family:var(--f-display);font-size:1.3rem;color:var(--on-jade)}
@@ -380,7 +380,7 @@ footer{border-top:1px solid var(--line)}
 :root[data-theme="dark"] .foot-logo{content:url(logo-light.svg)}
 @media (max-width:860px){.foot{grid-template-columns:1fr}.foot-links{justify-items:start}}
 
-@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}.playing .mk{stroke-dashoffset:0}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}.stroke-card .mk{stroke-dashoffset:0}}
 </style>
 </head>
 <body>
@@ -409,7 +409,7 @@ footer{border-top:1px solid var(--line)}
       <figure class="stroke-card" id="stroke" style="margin:0">
         <svg viewBox="0 0 220 220" aria-label="Порядок черт иероглифа 永">
           <g class="grid"><line x1="110" y1="6" x2="110" y2="214"/><line x1="6" y1="110" x2="214" y2="110"/><line x1="6" y1="6" x2="214" y2="214"/><line x1="214" y1="6" x2="6" y2="214"/></g>
-          <defs><mask id="sm0" maskUnits="userSpaceOnUse" x="0" y="0" width="220" height="220"><path class="mk" pathLength="1" style="animation-delay:0.0s" d="M100 29 L117 52"/></mask><mask id="sm1" maskUnits="userSpaceOnUse" x="0" y="0" width="220" height="220"><path class="mk" pathLength="1" style="animation-delay:0.6s" d="M70 77 L124 72 L122 192 L98 182"/></mask><mask id="sm2" maskUnits="userSpaceOnUse" x="0" y="0" width="220" height="220"><path class="mk" pathLength="1" style="animation-delay:1.2s" d="M38 107 L86 101 L24 164"/></mask><mask id="sm3" maskUnits="userSpaceOnUse" x="0" y="0" width="220" height="220"><path class="mk" pathLength="1" style="animation-delay:1.8s" d="M176 82 L132 127"/></mask><mask id="sm4" maskUnits="userSpaceOnUse" x="0" y="0" width="220" height="220"><path class="mk" pathLength="1" style="animation-delay:2.4s" d="M132 118 L180 182 L208 191"/></mask></defs>
+          <defs><mask id="sm0" maskUnits="userSpaceOnUse" x="0" y="0" width="220" height="220"><path class="mk" pathLength="1" style="animation-delay:0.0s" d="M94 21 L121 58"/></mask><mask id="sm1" maskUnits="userSpaceOnUse" x="0" y="0" width="220" height="220"><path class="mk" pathLength="1" style="animation-delay:0.6s" d="M58 78 L124 72 L122 194 L90 179"/></mask><mask id="sm2" maskUnits="userSpaceOnUse" x="0" y="0" width="220" height="220"><path class="mk" pathLength="1" style="animation-delay:1.2s" d="M26 108 L86 101 L18 170"/></mask><mask id="sm3" maskUnits="userSpaceOnUse" x="0" y="0" width="220" height="220"><path class="mk" pathLength="1" style="animation-delay:1.8s" d="M186 72 L126 133"/></mask><mask id="sm4" maskUnits="userSpaceOnUse" x="0" y="0" width="220" height="220"><path class="mk" pathLength="1" style="animation-delay:2.4s" d="M124 108 L180 182 L216 193"/></mask></defs>
           <path class="ghost" d="M98 30 C102 24 110 26 116 36 C122 44 122 54 114 56 C108 56 104 46 98 38 Z"/><path class="ghost" d="M70 70 C80 66 105 64 120 62 C130 60 136 66 132 74 L130 178 C130 190 126 200 118 200 C112 198 104 190 96 182 C104 184 110 184 114 182 L114 84 C100 84 84 84 72 84 C66 82 64 74 70 70 Z"/><path class="ghost" d="M40 100 C52 98 70 96 82 94 C92 92 96 100 90 108 C76 126 52 150 26 166 C22 168 20 164 24 160 C44 142 62 124 72 112 C62 112 52 114 44 114 C36 114 34 104 40 100 Z"/><path class="ghost" d="M170 80 C178 78 184 84 180 90 C168 104 152 118 136 128 C132 130 130 126 133 122 C146 110 158 96 166 84 Z"/><path class="ghost" d="M136 116 C150 134 168 160 182 176 C188 182 196 186 206 186 C206 192 198 196 188 196 C176 196 170 190 164 182 C152 164 140 142 130 124 C128 118 132 114 136 116 Z"/>
           <g><path class="ink" mask="url(#sm0)" d="M98 30 C102 24 110 26 116 36 C122 44 122 54 114 56 C108 56 104 46 98 38 Z"/><path class="ink" mask="url(#sm1)" d="M70 70 C80 66 105 64 120 62 C130 60 136 66 132 74 L130 178 C130 190 126 200 118 200 C112 198 104 190 96 182 C104 184 110 184 114 182 L114 84 C100 84 84 84 72 84 C66 82 64 74 70 70 Z"/><path class="ink" mask="url(#sm2)" d="M40 100 C52 98 70 96 82 94 C92 92 96 100 90 108 C76 126 52 150 26 166 C22 168 20 164 24 160 C44 142 62 124 72 112 C62 112 52 114 44 114 C36 114 34 104 40 100 Z"/><path class="ink" mask="url(#sm3)" d="M170 80 C178 78 184 84 180 90 C168 104 152 118 136 128 C132 130 130 126 133 122 C146 110 158 96 166 84 Z"/><path class="ink" mask="url(#sm4)" d="M136 116 C150 134 168 160 182 176 C188 182 196 186 206 186 C206 192 198 196 188 196 C176 196 170 190 164 182 C152 164 140 142 130 124 C128 118 132 114 136 116 Z"/></g>
         </svg>
